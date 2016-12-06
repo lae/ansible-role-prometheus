@@ -12,6 +12,9 @@ galaxy_info:
     - jessie
     - sid
     - stretch
+  - name: Ubuntu
+    versions:
+    - xenial
 
   galaxy_tags:
     - monitoring

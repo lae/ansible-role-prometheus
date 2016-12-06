@@ -26,6 +26,7 @@ before_cache:
 env:
   - LXC_NAME=test-debian8 LXC_DISTRO=debian LXC_RELEASE=jessie
   - LXC_NAME=test-debianX LXC_DISTRO=debian LXC_RELEASE=sid
+  - LXC_NAME=test-ubuntu16lts LXC_DISTRO=ubuntu LXC_RELEASE=xenial
 install:
 - pip install ansible
 - ansible --version
@@ -35,6 +36,9 @@ install:
 - '[ "x${LXC_DISTRO}" == "xdebian" ] && sudo LANG= LC_ALL= LC_CTYPE= lxc-create -n
   $LXC_NAME -t debian -- -r $LXC_RELEASE --mirror http://mirrors.us.kernel.org/debian
   --packages python,ca-certificates,curl,sudo || true'
+- '[ "x${LXC_DISTRO}" == "xubuntu" ] && sudo lxc-create -n $LXC_NAME -t ubuntu --
+  -r $LXC_RELEASE --mirror http://mirrors.us.kernel.org/ubuntu --packages python,ca-certificates,curl,sudo
+  || true'
 - printf "\nlxc.mount.auto = proc:rw sys:rw cgroup-full:rw\nlxc.aa_profile = unconfined" | sudo tee -a /var/lib/lxc/$LXC_NAME/config
 - sudo lxc-start -n $LXC_NAME && until (sudo lxc-info -n $LXC_NAME | grep -q ^IP:);
   do printf . && sleep 1; done && sleep 2
