@@ -25,7 +25,7 @@ before_cache:
 - sudo chown $USER. $HOME/lxc/cache.tar
 env:
   - LXC_NAME=test-debian8 LXC_DISTRO=debian LXC_RELEASE=jessie
-  - LXC_NAME=test-debianT LXC_DISTRO=debian LXC_RELEASE=stretch
+  - LXC_NAME=test-debianX LXC_DISTRO=debian LXC_RELEASE=sid
 install:
 - pip install ansible
 - ansible --version
