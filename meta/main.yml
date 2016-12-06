@@ -1,0 +1,19 @@
+galaxy_info:
+  author: Musee Ullah
+  description: Installs and configures Prometheus from Debian Testing
+  company: FireEye, Inc.
+  license: MIT
+
+  min_ansible_version: 2.1
+
+  platforms:
+  - name: Debian
+    versions:
+    - jessie
+    - sid
+    - stretch
+
+  galaxy_tags:
+    - monitoring
+
+dependencies: []

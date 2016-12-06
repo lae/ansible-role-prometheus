@@ -1,0 +1,6 @@
+---
+# handlers file for ansible-role-prometheus
+- name: reload prometheus
+  service:
+    name: prometheus
+    state: reloaded

@@ -1,0 +1,5 @@
+{% for package in prometheus_packages %}
+Package: {{ package }}
+Pin: release a={{ prometheus_repo_release }}
+Pin-Priority: {{ prometheus_repo_priority }}
+{% endfor %}

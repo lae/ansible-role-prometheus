@@ -1,0 +1,13 @@
+---
+- name: Configure repository for Prometheus
+  apt_repository:
+    repo: "deb {{ prometheus_repo_uri }} {{ prometheus_repo_release }} main"
+    state: present
+    filename: prometheus
+
+- name: Configure apt-pinning for Prometheus and dependencies
+  template:
+    src: preferences.j2
+    dest: /etc/apt/preferences.d/prometheus
+
+# vim:ft=ansible:

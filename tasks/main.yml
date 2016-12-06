@@ -1,0 +1,22 @@
+---
+# tasks file for ansible-role-prometheus
+- debug: var=prometheus_repo_configure
+
+- include: configure_repo.yml
+  when: prometheus_repo_configure
+
+- name: Install Prometheus
+  apt:
+    name: prometheus
+    update_cache: true
+    cache_valid_time: 1800
+    install_recommends: no
+    state: latest
+
+- name: Enable and start Prometheus
+  service:
+    name: prometheus
+    enabled: yes
+    state: started
+
+# vim:ft=ansible:

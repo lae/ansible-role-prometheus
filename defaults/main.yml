@@ -1,0 +1,7 @@
+---
+# defaults file for ansible-role-prometheus
+
+prometheus_repo_configure: "{{ (ansible_distribution_release == 'jessie') | ternary(true, false) }}"
+prometheus_repo_priority: 700
+prometheus_repo_release: testing
+prometheus_repo_uri: http://mirrors.us.kernel.org/debian/
