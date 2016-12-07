@@ -13,6 +13,14 @@
     install_recommends: no
     state: latest
 
+- name: Set command-line options for Prometheus
+  lineinfile:
+    regexp: '^ARGS=".*"$'
+    line: 'ARGS="{% for option, value in prometheus_options.iteritems() %}-{{ option }}={{ value }} {% endfor %}"'
+    dest: /etc/default/prometheus
+  notify:
+    - restart prometheus
+
 - name: Enable and start Prometheus
   service:
     name: prometheus

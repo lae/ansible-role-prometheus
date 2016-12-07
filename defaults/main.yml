@@ -1,5 +1,17 @@
 ---
 # defaults file for ansible-role-prometheus
+prometheus_config_file: /etc/prometheus/prometheus.yml
+prometheus_options:
+  config.file: "{{ prometheus_config_file }}"
+  alertmanager.url: "http://localhost:9093"
+#  log.level: info
+#  query.max-concurrency: 20
+#  storage.local.max-chunks-to-persist: 524288
+#  storage.local.memory-chunks: 1048576
+#  storage.local.path: "/var/lib/prometheus/metrics"
+#  storage.local.retention: "360h0m0s"
+#  web.listen-address: ":9090"
+#  web.external-url:
 
 prometheus_repo_configure: "{{ (ansible_distribution_release == 'jessie') | ternary(true, false) }}"
 prometheus_repo_priority: 700
