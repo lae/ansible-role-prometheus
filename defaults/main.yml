@@ -13,6 +13,9 @@ prometheus_options:
 #  web.listen-address: ":9090"
 #  web.external-url:
 
+prometheus_rule_dest_directory: /etc/prometheus/rules
+prometheus_rule_files: []
+
 prometheus_repo_configure: "{{ (ansible_distribution_release == 'jessie') | ternary(true, false) }}"
 prometheus_repo_priority: 700
 prometheus_repo_release: testing
