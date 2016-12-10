@@ -15,8 +15,7 @@ install:
 - sudo apt-get install -y expect-dev
 - pip install ansible
 - ansible --version
-- printf '[defaults]\nroles_path=../\nhost_key_checking=False\ncallback_whitelist=profile_tasks'
-  >ansible.cfg
+- printf '[defaults]\nroles_path=../\ncallback_whitelist=profile_tasks'  >ansible.cfg
 - ansible-galaxy install lae.travis-lxc
 - ansible-playbook -vvv tests/install.yml
 script:
@@ -26,8 +25,8 @@ script:
   2>&1
 - 'grep -A1 "PLAY RECAP" /tmp/idempotency.log | grep -qP "changed=0.*failed=0" && (echo "Idempotence:
   PASS"; exit 0) || (echo "Idempotence: FAIL"; cat /tmp/idempotency.log; exit 1)'
-- curl http://test01.lxc:9090/
-- sudo lxc-attach -n test01 -v PAGER=cat -- journalctl -xu prometheus.service
+- ansible -m uri -a 'url=http://{{ inventory_hostname }}:9090' -i tests/inventory all 
+- ansible -m shell -a "PAGER=cat journalctl -xu prometheus" -i tests/inventory all
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
